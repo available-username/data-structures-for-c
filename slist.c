@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "common.h"
 #include "slist.h"
 
 SList*
@@ -21,13 +22,6 @@ slist_insert(SList *list, void *data,
 		return node;
 	}
 
-	/* If position == 0 then make the new node the new head of the list.
-	 */
-	if (position == 0) {
-		node->next = list;
-		return node;
-	}
-
 	/* Iterate through the list and insert at the proper position.
 	*/
 	previous = NULL;
@@ -42,16 +36,7 @@ slist_insert(SList *list, void *data,
 		current = current->next;
 	}
 
-	if (current == NULL) {
-		/* The requested position is at the very end of the list.
-		 */
-		node->next = NULL;
-	} else {
-		/* The requested position is somewhere in between two existing elements.
-		 */
-		node->next = current;
-	}
-
+	node->next = current;
 	previous->next = node;
 
 	return list;
@@ -88,26 +73,12 @@ slist_remove(SList *list,
 {
 	SList *previous;
 	SList *current;
-	SList *tmp;
 	uint32_t i;
 
 	/* If the list is empty just return NULL.
 	 */
 	if (list == NULL) {
 		return NULL;
-	}
-
-	/* Remove the first element of the list. It's the resonsibility of the
-	 * client to free memory that is possibly pointed to by the node's data
-	 * pointer.
-	 */
-	if (position == 0) {
-		tmp = list;
-
-		list = list->next;
-		free(tmp);
-
-		return list;
 	}
 
 	previous = NULL;
@@ -122,7 +93,9 @@ slist_remove(SList *list,
 		current = current->next;
 	}
 
-	if (previous != NULL) {
+	if (previous == NULL) {
+		list = current->next;
+	} else {
 		previous->next = current != NULL ? current->next : NULL;
 	}
 

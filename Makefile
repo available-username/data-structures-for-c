@@ -4,7 +4,8 @@ LIB			= libutil.so
 CFLAGS		= -fPIC -pedantic -Wall -Wextra -Werror -g -O0
 LDFLAGS		= -shared
 
-OBJS		= slist.o
+OBJS		= slist.o \
+			dlist.o
 
 export LIB
 

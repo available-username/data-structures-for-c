@@ -1,17 +1,19 @@
-#ifndef _SLIST_H_
-#define _SLIST_H_
+#ifndef _DLIST_H_
+#define _DLIST_H_
 
 #include <stdint.h>
 #include "common.h"
 
-typedef struct _SList SList;
+
+typedef struct _DList DList;
 
 /**
- * A singel linked list node.
+ * A double linked list node.
  */
-struct _SList {
+struct _DList {
 	void *data;
-	SList *next;
+	DList *prev;
+	DList *next;
 };
 
 /**
@@ -24,8 +26,8 @@ struct _SList {
  * set the position to the size of the list.
  * \return The new head of the list.
  */
-SList*
-slist_insert(SList *list, void *data,
+DList*
+dlist_insert(DList *list, void *data,
 	uint32_t position);
 
 /**
@@ -35,8 +37,8 @@ slist_insert(SList *list, void *data,
  * \param position the position of the element to remove.
  * \return The new head of the list.
  */
-SList*
-slist_remove(SList *list,
+DList*
+dlist_remove(DList *list,
 	uint32_t position);
 
 /**
@@ -47,7 +49,7 @@ slist_remove(SList *list,
  * \return The element at position \c position.
  */
 void*
-slist_get(SList *list,
+dlist_get(DList *list,
 	uint32_t position);
 
 /**
@@ -57,7 +59,7 @@ slist_get(SList *list,
  * \brief list The list to destroy.
  */
 void
-slist_destroy(SList *list);
+dlist_destroy(DList *list);
 
 /**
  * Get the size of the list.
@@ -66,7 +68,7 @@ slist_destroy(SList *list);
  * \return The number of elements kept in the list.
  */
 uint32_t
-slist_size(SList *list);
+dlist_size(DList *list);
 
 /**
  * Runs a function for each element of the list.
@@ -76,6 +78,6 @@ slist_size(SList *list);
  * \param userdata An optional pointer to supply to the function \c func.
  */
 void
-slist_foreach(SList *list, foreach func, void* userdata);
+dlist_foreach(DList *list, foreach func, void* userdata);
 
-#endif /* _SLIST_H_ */
+#endif /* _DLIST_H_ */

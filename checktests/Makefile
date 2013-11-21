@@ -4,9 +4,11 @@ CFLAGS	= -pedantic -Wall -Wextra -Werror -I../ -g -O0
 LDFLAGS	= -L../
 LDLIBS	= -lcheck -lutil
 PROG	= check_util
-OBJS	= check_main.o \
-		check_slist.o
 LIBS	= check
+
+OBJS	= check_main.o \
+		check_slist.o \
+		check_dlist.o
 
 %.o:%.c
 	$(CC) $(CFLAGS) -c $^ -o $@
