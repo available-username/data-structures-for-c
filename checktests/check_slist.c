@@ -92,6 +92,39 @@ START_TEST(check_slist_remove2)
 }
 END_TEST
 
+static void
+test_foreach(void *data, void *userdata)
+{
+	uint64_t *i = (uint64_t*)data;
+
+	*i = *i * (uint64_t)userdata;
+}
+
+START_TEST(check_slist_foreach)
+{
+	SList *list = NULL;
+	uint64_t array[10];
+	uint64_t multiplier = 10;
+	uint64_t i;
+
+	for (i = 0; i < 10; i++) {
+		array[i] = i;
+
+		list = slist_insert(list, array + i, i);
+	}
+
+	slist_foreach(list, test_foreach, (void*)multiplier);
+
+	for (i = 0; i < 10; i++) {
+		uint64_t* v = (uint64_t*)slist_get(list, i);
+
+		fail_unless(*v == i * multiplier);
+	}
+
+	slist_destroy(list);
+}
+END_TEST
+
 Suite *
 slist_suite(void)
 {
@@ -103,6 +136,7 @@ slist_suite(void)
 	tcase_add_test(test_case, check_slist_insert2);
 	tcase_add_test(test_case, check_slist_remove);
 	tcase_add_test(test_case, check_slist_remove2);
+	tcase_add_test(test_case, check_slist_foreach);
 
 	suite_add_tcase(suite, test_case);
 
