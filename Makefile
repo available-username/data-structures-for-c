@@ -5,7 +5,8 @@ CFLAGS		= -fPIC -pedantic -Wall -Wextra -Werror -g -O0
 LDFLAGS		= -shared
 
 OBJS		= slist.o \
-			dlist.o
+			dlist.o \
+			stack.o
 
 export LIB
 

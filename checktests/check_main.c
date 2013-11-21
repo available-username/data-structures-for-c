@@ -2,6 +2,7 @@
 #include <check.h>
 #include "check_slist.h"
 #include "check_dlist.h"
+#include "check_stack.h"
 
 int main(void)
 {
@@ -11,6 +12,8 @@ int main(void)
 		runner = srunner_create(slist_suite());
 
 		srunner_add_suite(runner, dlist_suite());
+
+		srunner_add_suite(runner, stack_suite());
 
 		srunner_run_all(runner, CK_NORMAL);
 
