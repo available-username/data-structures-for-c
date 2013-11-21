@@ -9,7 +9,9 @@ LIBS	= check
 OBJS	= check_main.o \
 		check_slist.o \
 		check_dlist.o \
-		check_stack.o
+		check_stack.o \
+		check_queue.o \
+		check_tree.o
 
 %.o:%.c
 	$(CC) $(CFLAGS) -c $^ -o $@

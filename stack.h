@@ -5,6 +5,7 @@
 
 typedef struct _Stack {
 	SList *list;
+	uint32_t size;
 } Stack;
 
 Stack*
@@ -21,5 +22,8 @@ stack_pop(Stack *stack);
 
 void
 stack_destroy(Stack *stack);
+
+uint32_t
+stack_size(Stack *stack);
 
 #endif /* _STACK_H_ */

@@ -6,7 +6,9 @@ LDFLAGS		= -shared
 
 OBJS		= slist.o \
 			dlist.o \
-			stack.o
+			stack.o \
+			queue.o \
+			tree.o
 
 export LIB
 

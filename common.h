@@ -3,6 +3,12 @@
 
 #define NELEMS(a) (sizeof(a) / sizeof((a)[0]))
 
+#define SWAP(T, a, b) do { \
+	T __t = (a);           \
+	(a) = (b);             \
+	(b) = __t;             \
+} while(0)
+
 /**
  * A function pointer to apply to each element of a collection.
  *

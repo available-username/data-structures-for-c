@@ -3,6 +3,8 @@
 #include "check_slist.h"
 #include "check_dlist.h"
 #include "check_stack.h"
+#include "check_queue.h"
+#include "check_tree.h"
 
 int main(void)
 {
@@ -10,10 +12,10 @@ int main(void)
 		int number_failed;
 
 		runner = srunner_create(slist_suite());
-
 		srunner_add_suite(runner, dlist_suite());
-
 		srunner_add_suite(runner, stack_suite());
+		srunner_add_suite(runner, queue_suite());
+		srunner_add_suite(runner, tree_suite());
 
 		srunner_run_all(runner, CK_NORMAL);
 
