@@ -37,7 +37,12 @@ slist_insert(SList *list, void *data,
 	}
 
 	node->next = current;
-	previous->next = node;
+
+	if (previous != NULL) {
+		previous->next = node;
+	} else {
+		list = node;
+	}
 
 	return list;
 }

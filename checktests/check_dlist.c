@@ -51,6 +51,27 @@ START_TEST(check_dlist_insert2)
 }
 END_TEST
 
+START_TEST(check_dlist_insert3)
+{
+	DList *list = NULL;
+	uint64_t i;
+
+	for (i = 0; i < 10; i++) {
+		list = dlist_insert(list, (void*)i, 0);
+	}
+
+	for (; i > 0; i--) {
+		uint64_t v = (uint64_t)dlist_get(list, 0);
+
+		fail_unless(v == i - 1, "Got %ld, expected %ld", v, i - 1);
+
+		list = dlist_remove(list, 0);
+	}
+
+	dlist_destroy(list);
+}
+END_TEST
+
 START_TEST(check_dlist_remove)
 {
 	DList *list = NULL;
@@ -134,6 +155,7 @@ dlist_suite(void)
 
 	tcase_add_test(test_case, check_dlist_insert);
 	tcase_add_test(test_case, check_dlist_insert2);
+	tcase_add_test(test_case, check_dlist_insert3);
 	tcase_add_test(test_case, check_dlist_remove);
 	tcase_add_test(test_case, check_dlist_remove2);
 	tcase_add_test(test_case, check_dlist_foreach);
